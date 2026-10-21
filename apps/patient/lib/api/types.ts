@@ -42,8 +42,15 @@ export interface CompleteRegistrationResult {
 /** The signed-in person, as the login endpoints return them. */
 export interface SessionUser {
   id: string
-  fullName: string
-  personalId: string
+  /** "patient" for the patient app. Hospital accounts are "org_admin" or "org_staff". */
+  type: "patient" | "org_admin" | "org_staff" | (string & {})
+  /** Null for hospital accounts (they have no patient profile). */
+  fullName: string | null
+  personalId: string | null
+  /** The display name, e.g. "Tunde Adeyemi". */
+  username: string | null
+  /** Set for hospital accounts only. */
+  organisation: { id: string; name: string } | null
 }
 
 export interface LoginInput {
