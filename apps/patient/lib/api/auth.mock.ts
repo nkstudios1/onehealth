@@ -141,7 +141,10 @@ export const mockAuthApi: AuthApi = {
     return {
       user: {
         id: crypto.randomUUID(),
+        type: "patient",
         fullName: "Test Patient",
+        username: "Test Patient",
+        organisation: null,
         personalId: identifier.includes("@") ? "8012345678" : identifier.trim(),
       },
     }
@@ -150,7 +153,14 @@ export const mockAuthApi: AuthApi = {
   async loginWithGoogle() {
     await latency()
     return {
-      user: { id: crypto.randomUUID(), fullName: "Test Patient", personalId: "8012345678" },
+      user: {
+        id: crypto.randomUUID(),
+        type: "patient",
+        fullName: "Test Patient",
+        username: "Test Patient",
+        organisation: null,
+        personalId: "8012345678",
+      },
     }
   },
 

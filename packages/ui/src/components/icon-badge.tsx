@@ -37,6 +37,7 @@ export function IconBadge(props: IconBadgeProps) {
   }
 
   const Glyph = props.icon
+  if (!Glyph) return null // TypeScript cannot narrow the union above; "brand" always has an icon
   return (
     <div aria-hidden className={cn(shell, "bg-brand-weak", className)}>
       <Glyph size={64} weight="regular" className="text-brand" />

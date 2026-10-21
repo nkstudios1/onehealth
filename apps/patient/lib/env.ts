@@ -5,7 +5,7 @@
  */
 export const env = {
   useMocks: process.env.NEXT_PUBLIC_USE_MOCKS === "true",
-  apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api",
+  apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1",
   portalSignupUrl: process.env.NEXT_PUBLIC_PORTAL_SIGNUP_URL ?? "http://localhost:3000/signup",
   termsUrl: process.env.NEXT_PUBLIC_TERMS_URL ?? "/terms",
   privacyUrl: process.env.NEXT_PUBLIC_PRIVACY_URL ?? "/privacy",

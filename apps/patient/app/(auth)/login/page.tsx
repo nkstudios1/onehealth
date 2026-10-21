@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@workspace/ui/components/button"
-import { Divider } from "@workspace/ui/components/divider"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@workspace/ui/components/field"
 import { FlowCard } from "@workspace/ui/components/flow-card"
 import { Input } from "@workspace/ui/components/input"
@@ -15,9 +14,8 @@ import { PasswordInput } from "@workspace/ui/components/password-input"
 import { textLinkBoldClass } from "@workspace/ui/lib/link-classes"
 
 import { Logo } from "@/components/brand/logo"
-import { GoogleIcon } from "@/components/brand/google-icon"
 import { authApi, getErrorMessage } from "@/lib/api"
-import { ROUTES } from "@/lib/routes"
+import { ROUTES, hospitalRoutes } from "@/lib/routes"
 import { useSessionStore } from "@/lib/stores/session-store"
 import { loginSchema, type LoginValues } from "@/lib/validation/login"
 import { useResetStore } from "@/lib/stores/reset-store"
@@ -27,7 +25,6 @@ export default function LoginPage() {
   const setUser = useSessionStore((s) => s.setUser)
 
   const [formError, setFormError] = useState<string | null>(null)
-  const [googleLoading, setGoogleLoading] = useState(false)
   const passwordChanged = useResetStore((s) => s.passwordChanged)
   const dismissNotice = useResetStore((s) => s.dismissNotice)
 
@@ -46,28 +43,14 @@ export default function LoginPage() {
     try {
       const { user } = await authApi.login(values)
       setUser(user)
-      router.replace(ROUTES.home)
+      // Patients go to their home; hospital staff to the hospital screens.
+      router.replace(user.type === "patient" ? ROUTES.home : hospitalRoutes.scan)
     } catch (error) {
       // One message under the button for every failure. We deliberately do NOT
       // say which of the two fields was wrong (that would help attackers guess IDs).
       setFormError(getErrorMessage(error))
     }
   }
-
-  async function onGoogle() {
-    setFormError(null)
-    setGoogleLoading(true)
-    try {
-      const { user } = await authApi.loginWithGoogle()
-      setUser(user)
-      router.replace(ROUTES.home)
-    } catch (error) {
-      setFormError(getErrorMessage(error))
-      setGoogleLoading(false)
-    }
-  }
-
-  const busy = isSubmitting || googleLoading
 
   return (
     <FlowCard className="gap-6 py-10">
@@ -121,23 +104,10 @@ export default function LoginPage() {
             <p role="alert" className="text-body text-danger">{formError}</p>
           ) : null}
 
-          <Button type="submit" loading={isSubmitting} disabled={googleLoading}>
+          <Button type="submit" loading={isSubmitting}>
             Login
           </Button>
 
-          {/* Remove from here ... */}
-          <Divider>OR</Divider>
-          <Button
-            variant="outline"
-            className="px-4"
-            loading={googleLoading}
-            disabled={isSubmitting}
-            onClick={onGoogle}
-          >
-            {googleLoading ? null : <GoogleIcon />}
-            Continue with Google
-          </Button>
-          {/* ... to here if the backend has no Google login */}
 
           <p className="text-center text-body">
             Don&apos;t have an account?{" "}

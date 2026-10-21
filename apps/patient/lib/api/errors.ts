@@ -11,6 +11,11 @@ export type ApiErrorCode =
   | "REGISTRATION_STEP_INVALID" | "OTP_DELIVERY_FAILED"
   | "ACCOUNT_SUSPENDED" | "TOO_MANY_ATTEMPTS" | "REQUEST_FORGERY"
   | "VALIDATION_FAILED" | "UNAUTHENTICATED" | "SERVER_ERROR"
+  // cards, access requests, sessions and records:
+  | "CARD_NOT_FOUND" | "CARD_NOT_ACTIVE" | "ORGANISATION_NOT_VERIFIED"
+  | "ACCESS_REQUEST_NOT_FOUND" | "ACCESS_REQUEST_CLOSED" | "APPROVAL_CODE_INVALID"
+  | "SESSION_NOT_FOUND" | "SESSION_CLOSED" | "RECORD_NOT_FOUND"
+  | "FORBIDDEN"
   
 /** Every failure from the API layer is an ApiError, so screens handle one type. */
 export class ApiError extends Error {

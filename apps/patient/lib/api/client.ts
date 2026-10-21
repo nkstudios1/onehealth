@@ -14,7 +14,7 @@ type Envelope<T> =
 /** Laravel puts a CSRF token in the XSRF-TOKEN cookie; we send it back in a header. */
 function readXsrfCookie(): string | null {
   const match = document.cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]+)/)
-  return match ? decodeURIComponent(match[1]) : null
+  return match?.[1] ? decodeURIComponent(match[1]) : null
 }
 
 async function ensureCsrfCookie() {
