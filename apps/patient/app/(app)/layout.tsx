@@ -42,7 +42,7 @@ export default function PatientAppLayout({ children }: { children: React.ReactNo
       <header className="sticky top-0 z-30 flex h-[76px] items-center justify-between border-b border-line bg-surface px-5 lg:px-9">
         <Logo className="h-9" />
         <div className="relative flex items-center gap-2">
-          <Button className="hidden h-10 rounded-lg px-4 sm:flex" onClick={() => router.push("/approve")}>
+          <Button className="hidden h-10 rounded-lg px-4 sm:flex" onClick={() => router.push("/access") }>
             <UsersThree aria-hidden size={19} /> Share access
           </Button>
           <button type="button" aria-label="Notifications" className="relative flex size-10 items-center justify-center rounded-lg border border-line bg-surface hover:bg-field">
