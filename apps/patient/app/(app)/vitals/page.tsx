@@ -76,7 +76,7 @@ export default function VitalsPage() {
         </article>
       </section>
 
-      {error ? <div role="alert" className="mt-5 rounded-xl border border-red-300 bg-red-50 p-4 text-sm text-red-800"><p>{error}</p><button type="button" onClick={() => void load()} className="mt-2 font-semibold underline">Try again</button></div> : null}
+      {error ? <div role="alert" className="mt-5 rounded-xl border border-danger bg-danger-weak p-4 text-sm text-danger"><p>{error}</p><button type="button" onClick={() => void load()} className="mt-2 font-semibold underline">Try again</button></div> : null}
 
       <section className="mt-6">
         <div className="flex items-center justify-between gap-3">
