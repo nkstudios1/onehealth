@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
+import { useTheme } from "next-themes"
 import { Bell, CaretDown, CaretLeft, CaretRight, Gear, House, IdentificationCard, List, SignOut, UserCircle, UsersThree } from "@phosphor-icons/react"
 import { Button } from "@workspace/ui/components/button"
 import { Logo } from "@/components/brand/logo"
@@ -24,6 +25,8 @@ export default function PatientAppLayout({ children }: { children: React.ReactNo
   const { user, ready } = useRequireSession(isPatient, hospitalRoutes.scan)
   const [collapsed, setCollapsed] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [themeOpen, setThemeOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   async function logout() {
     try { await sessionApi.logout() } finally { clear(); router.replace(ROUTES.login) }
@@ -59,7 +62,16 @@ export default function PatientAppLayout({ children }: { children: React.ReactNo
                 <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-field"><IdentificationCard size={20} /> OneHealth Card</button>
                 <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-field"><UsersThree size={20} /> Emergency Contacts</button>
               </div>
-              <div className="border-y border-line p-2"><button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-field"><span className="flex-1">Theme</span><span className="rounded-md border border-line px-2 py-1 text-caption">System default <CaretDown className="ml-1 inline" /></span></button><button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-field"><Gear size={20} /> Settings</button></div>
+              <div className="border-y border-line p-2">
+                <button type="button" onClick={() => setThemeOpen((open) => !open)} aria-expanded={themeOpen} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-field">
+                  <span className="flex-1">Theme</span>
+                  <span className="rounded-md border border-line px-2 py-1 text-caption capitalize">{theme ?? "system"} <CaretDown className="ml-1 inline" /></span>
+                </button>
+                {themeOpen ? <div className="ml-8 mt-1 space-y-1 pb-2">
+                  {(["light", "dark", "system"] as const).map((option) => <button key={option} type="button" onClick={() => { setTheme(option); setThemeOpen(false) }} className={`block w-full rounded-md px-3 py-2 text-left text-body capitalize hover:bg-field ${theme === option ? "bg-brand-weak font-medium text-brand" : ""}`}>{option}{theme === option ? " ✓" : ""}</button>)}
+                </div> : null}
+                <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-field"><Gear size={20} /> Settings</button>
+              </div>
               <div className="p-2"><button className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-field">Switch account <CaretRight size={18} /></button><button onClick={logout} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[#ef1f4b] hover:bg-field"><SignOut size={20} /> Log out</button></div>
             </div>
           ) : null}
