@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, ArrowClockwise, FileText, Plus, Eye, LockKey, Activity, ClipboardText, FirstAidKit } from "@phosphor-icons/react"
+import { ArrowLeft, ArrowClockwise, FileText, Plus, Eye, LockKey, ActivityIcon, ClipboardText, FirstAidKit } from "@phosphor-icons/react"
 import { accessApi } from "@/lib/api/access"
 import type { NewRecordInput, PatientRecord, RecordCategory, RecordVisibility } from "@/lib/api/access-types"
 
@@ -11,7 +11,7 @@ const filters: { value: RecordCategory | "all"; label: string }[] = [
   { value: "medical_history", label: "Medical history" }, { value: "clinical_report", label: "Clinical reports" },
 ]
 const labels: Record<RecordCategory, string> = { vitals: "Vitals", medical_history: "Medical history", clinical_report: "Clinical report" }
-const icons = { vitals: Activity, medical_history: FirstAidKit, clinical_report: ClipboardText }
+const icons = { vitals: ActivityIcon, medical_history: FirstAidKit, clinical_report: ClipboardText }
 const formatDate = (value: string | null) => {
   if (!value) return "Date not specified"
   const date = new Date(value)
