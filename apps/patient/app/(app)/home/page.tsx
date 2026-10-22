@@ -32,10 +32,10 @@ const vitals = [
 ]
 
 const sessions = [
-  { name: "Perfect Medicals Inc.", tag: "Card scan", access: "General", mark: "✦", markClass: "bg-[#1754a5] text-white" },
-  { name: "Dr. Oseyi Chinedu", tag: "Biometrics", access: "General", mark: "OC", markClass: "bg-[#252525] text-white" },
-  { name: "Dr. Oseyi Chinedu", tag: "Emergency", access: "General", mark: "FL", markClass: "bg-[#a000b8] text-white" },
-  { name: "Adetunji Osamede", tag: "In-app", access: "Full access", mark: "AO", markClass: "bg-[#ececec] text-[#555]", warning: true },
+  { name: "Perfect Medicals Inc.", tag: "Card scan", access: "General", mark: "✦", markClass: "bg-[#1754a5] text-on-brand" },
+  { name: "Dr. Oseyi Chinedu", tag: "Biometrics", access: "General", mark: "OC", markClass: "bg-[#252525] text-on-brand" },
+  { name: "Dr. Oseyi Chinedu", tag: "Emergency", access: "General", mark: "FL", markClass: "bg-[#a000b8] text-on-brand" },
+  { name: "Adetunji Osamede", tag: "In-app", access: "Full access", mark: "AO", markClass: "bg-chip text-ink-subtle", warning: true },
 ]
 
 const setup = [
@@ -49,7 +49,7 @@ const setup = [
 
 function VitalCard({ item }: { item: (typeof vitals)[number] }) {
   return (
-    <article className="w-[190px] shrink-0 rounded-2xl border border-[#e2e2e2] bg-[#f8f8f8] p-4">
+    <article className="w-[190px] shrink-0 rounded-2xl border border-line bg-field p-4">
       <div className="flex items-center gap-2">
         <span className={`flex size-8 items-center justify-center rounded-full ${item.iconClass}`}>
           <item.Icon aria-hidden size={18} />
@@ -59,18 +59,18 @@ function VitalCard({ item }: { item: (typeof vitals)[number] }) {
 
       <div className="mt-6 flex min-h-[54px] flex-col justify-end">
         {"lines" in item ? (
-          <div className="space-y-1 text-[13px] text-[#666]">
-            {item.lines?.map((line) => <span key={line} className="block w-fit rounded border border-[#dedede] bg-white px-2 py-0.5">{line}</span>)}
+          <div className="space-y-1 text-[13px] text-ink-subtle">
+            {item.lines?.map((line) => <span key={line} className="block w-fit rounded border border-line-subtle bg-surface px-2 py-0.5">{line}</span>)}
           </div>
         ) : (
           <p className="whitespace-nowrap">
             <span className="text-[31px] font-extrabold tracking-tight">{item.value}</span>
-            <span className="ml-1 text-[13px] text-[#777]">{item.unit}</span>
+            <span className="ml-1 text-[13px] text-ink-subtle">{item.unit}</span>
           </p>
         )}
       </div>
 
-      <div className="mt-4 flex items-center justify-between border-t border-[#dedede] pt-3 text-[12px] text-[#777]">
+      <div className="mt-4 flex items-center justify-between border-t border-line-subtle pt-3 text-[12px] text-ink-subtle">
         <span>Last updated: 2d ago</span>
         <CaretRight aria-hidden size={17} />
       </div>
@@ -81,17 +81,17 @@ function VitalCard({ item }: { item: (typeof vitals)[number] }) {
 function SummaryCard({ kind, value, label, detail, icon }: { kind: "records" | "sessions" | "requests"; value: string; label: string; detail: string; icon: React.ReactNode }) {
   const records = kind === "records"
   return (
-    <article className={`flex min-h-[168px] flex-col justify-between rounded-2xl border p-4 shadow-sm ${records ? "border-transparent bg-[#2b8878] text-white" : "border-[#e2e2e2] bg-white text-[#111]"}`}>
+    <article className={`flex min-h-[168px] flex-col justify-between rounded-2xl border p-4 shadow-sm ${records ? "border-transparent bg-brand text-on-brand" : "border-line bg-surface text-ink"}`}>
       <div className="flex items-center justify-between text-[13px] font-medium">
         <span>{records ? "TOTAL RECORDS" : kind === "sessions" ? "ACTIVE SESSIONS" : "PENDING REQUESTS"}</span>
-        <span className={records ? "text-white" : "text-[#238f80]"}>{icon}</span>
+        <span className={records ? "text-on-brand" : "text-brand"}>{icon}</span>
       </div>
       <div>
         <div className="flex items-baseline gap-2">
           <strong className="text-[48px] leading-none tracking-tight">{value}</strong>
-          <span className={`font-semibold ${records ? "text-white" : "text-[#238f80]"}`}>{label}</span>
+          <span className={`font-semibold ${records ? "text-on-brand" : "text-brand"}`}>{label}</span>
         </div>
-        <div className={`mt-2 flex items-center justify-between text-[12px] ${records ? "text-white/85" : "text-[#777]"}`}>
+        <div className={`mt-2 flex items-center justify-between text-[12px] ${records ? "text-on-brand/85" : "text-ink-subtle"}`}>
           <span>{detail}</span>
           <CaretRight aria-hidden size={19} />
         </div>
@@ -114,10 +114,10 @@ export default function HomePage() {
         <SummaryCard kind="requests" value="3" label="Action required" detail="Clinical consent" icon={<ArrowRight aria-hidden size={22} />} />
       </section>
 
-      <section id="vitals" className="mt-6 overflow-hidden rounded-2xl border border-[#e2e2e2] bg-white p-5">
+      <section id="vitals" className="mt-6 overflow-hidden rounded-2xl border border-line bg-surface p-5">
         <div className="flex items-center justify-between gap-4">
           <h2 className="font-display text-[20px] font-extrabold">My health vitals</h2>
-          <Link href="#vitals" className="flex shrink-0 items-center gap-1 text-[15px] font-medium text-[#238f80]">View readings <CaretRight aria-hidden size={18} /></Link>
+          <Link href="#vitals" className="flex shrink-0 items-center gap-1 text-[15px] font-medium text-brand">View readings <CaretRight aria-hidden size={18} /></Link>
         </div>
         <div className="mt-5 flex gap-5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {vitals.map((item) => <VitalCard key={item.label} item={item} />)}
@@ -125,10 +125,10 @@ export default function HomePage() {
       </section>
 
       <section className="mt-6 grid gap-6 lg:grid-cols-[1.45fr_0.75fr]">
-        <article id="access-log" className="min-h-[500px] rounded-2xl border border-[#e2e2e2] bg-white p-5">
+        <article id="access-log" className="min-h-[500px] rounded-2xl border border-line bg-surface p-5">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-[20px] font-extrabold">Recent sessions</h2>
-            <Link href="#access-log" className="flex items-center gap-1 text-[15px] font-medium text-[#238f80]">See all <CaretRight aria-hidden size={18} /></Link>
+            <Link href="#access-log" className="flex items-center gap-1 text-[15px] font-medium text-brand">See all <CaretRight aria-hidden size={18} /></Link>
           </div>
 
           <div className="mt-4 divide-y divide-[#e5e5e5]">
@@ -140,25 +140,25 @@ export default function HomePage() {
                   {session.warning ? <span className="text-[13px] text-[#ff7a00]">Unverified</span> : null}
                 </div>
                 <div className="flex shrink-0 items-center gap-2 text-[12px]">
-                  <span className="rounded border border-[#d7d7d7] px-2 py-1 text-[#777]">{session.tag}</span>
-                  <span className={`rounded-full px-2 py-1 ${session.warning ? "bg-[#efd8ff] text-[#a100d6]" : "bg-[#ececec] text-[#777]"}`}>{session.access}</span>
+                  <span className="rounded border border-line-subtle px-2 py-1 text-ink-subtle">{session.tag}</span>
+                  <span className={`rounded-full px-2 py-1 ${session.warning ? "bg-[#efd8ff] text-[#a100d6]" : "bg-chip text-ink-subtle"}`}>{session.access}</span>
                 </div>
               </div>
             ))}
           </div>
         </article>
 
-        <article id="records" className="rounded-2xl border border-[#e2e2e2] bg-white p-5">
+        <article id="records" className="rounded-2xl border border-line bg-surface p-5">
           <h2 className="font-display text-[20px] font-extrabold">Complete your account setup</h2>
-          <div className="mx-auto mt-7 flex size-[112px] items-center justify-center rounded-full border-[10px] border-[#e5e5e5] border-r-[#238f80] border-t-[#238f80] text-[30px]">50%</div>
+          <div className="mx-auto mt-7 flex size-[112px] items-center justify-center rounded-full border-[10px] border-line border-r-brand border-t-brand text-[30px]">50%</div>
 
           <div className="mt-7 divide-y divide-[#e5e5e5]">
             {setup.map((item) => (
               <div key={item.text} className="flex min-h-[52px] items-center gap-2 py-2 text-[15px]">
-                <span>{item.done ? <CheckCircle aria-hidden className="text-[#238f80]" size={19} weight="fill" /> : <Circle aria-hidden className="text-[#777]" size={19} />}</span>
+                <span>{item.done ? <CheckCircle aria-hidden className="text-brand" size={19} weight="fill" /> : <Circle aria-hidden className="text-ink-subtle" size={19} />}</span>
                 <span className="flex-1">{item.text}</span>
                 {item.count ? <span className="font-medium">({item.count})</span> : null}
-                {item.arrow ? <CaretRight aria-hidden size={17} className="text-[#777]" /> : null}
+                {item.arrow ? <CaretRight aria-hidden size={17} className="text-ink-subtle" /> : null}
               </div>
             ))}
           </div>
