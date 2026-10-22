@@ -3,19 +3,19 @@
 import { useMemo } from "react"
 import Link from "next/link"
 import {
-  Activity,
-  ArrowRight,
-  CaretRight,
-  CheckCircle,
-  Circle,
-  Drop,
-  FileText,
-  Heartbeat,
-  Lightning,
-  PersonSimple,
-  Thermometer,
-  UserCircle,
-  Wind,
+  ActivityIcon as Activity,
+  ArrowRightIcon as ArrowRight,
+  CaretRightIcon as CaretRight,
+  CheckCircleIcon as CheckCircle,
+  CircleIcon as Circle,
+  DropIcon as Drop,
+  FileTextIcon as FileText,
+  HeartbeatIcon as Heartbeat,
+  LightningIcon as Lightning,
+  PersonSimpleIcon as PersonSimple,
+  ThermometerIcon as Thermometer,
+  UserCircleIcon as UserCircle,
+  WindIcon as Wind,
 } from "@phosphor-icons/react"
 
 import { useSessionStore } from "@/lib/stores/session-store"
