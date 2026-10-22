@@ -40,6 +40,8 @@ export interface NewRecordInput {
   summary?: string
   /** Records are private unless the patient chooses to share them. */
   visibility: RecordVisibility
+  /** Optional date when the health event occurred. */
+  eventAt?: string
 }
 
 /** A hospital asking to see a patient's records. Same shape for the patient and for a contact. */
