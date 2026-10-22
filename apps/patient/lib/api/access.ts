@@ -3,8 +3,10 @@ import { request } from "./client"
 import type {
   AccessRequestSummary,
   HealthCard,
+  NewRecordInput,
   PatientRecord,
   PatientSession,
+  RecordVisibility,
 } from "./access-types"
 
 /** `request(path, body, method)`: a GET passes `undefined` as the body. */
@@ -18,6 +20,13 @@ export const accessApi = {
     request<{ card: HealthCard }>("/cards/activate", { cardNumber }).then((r) => r.card),
 
   getRecords: () => get<{ records: PatientRecord[] }>("/records").then((r) => r.records),
+  addRecord: (input: NewRecordInput) =>
+    request<{ record: PatientRecord }>("/records", input).then((r) => r.record),
+  /** PATCH: only the patient can change who may see a record. */
+  setVisibility: (id: string, visibility: RecordVisibility) =>
+    request<{ record: PatientRecord }>(`/records/${id}/visibility`, { visibility }, "PATCH").then(
+      (r) => r.record,
+    ),
 
   pendingRequests: () =>
     get<{ requests: AccessRequestSummary[] }>("/access/requests/pending").then((r) => r.requests),
@@ -26,6 +35,9 @@ export const accessApi = {
 
   activeSessions: () =>
     get<{ sessions: PatientSession[] }>("/access/sessions?status=active").then((r) => r.sessions),
+  /** Every hospital that ever had access, newest first. Active and ended. */
+  sessionHistory: () =>
+    get<{ sessions: PatientSession[] }>("/access/sessions").then((r) => r.sessions),
   revoke: (id: string) => request<unknown>(`/access/sessions/${id}/revoke`, {}),
 
   // ---- emergency contact who has the app ----

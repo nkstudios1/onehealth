@@ -25,7 +25,7 @@ async function ensureCsrfCookie() {
 export async function request<T>(
   path: string,
   body?: unknown,
-  method: "GET" | "POST" = "POST"
+  method: "GET" | "POST" | "PATCH" = "POST"
 ): Promise<T> {
   let response: Response
   try {
