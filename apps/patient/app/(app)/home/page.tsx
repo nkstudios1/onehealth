@@ -1,10 +1,12 @@
 "use client"
 
+import { AccessHistory } from "@/components/access/access-history"
 import { ActiveSessions } from "@/components/access/active-sessions"
 import { PendingRequests } from "@/components/access/pending-requests"
 import { ActivateCard } from "@/components/card/activate-card"
 import { HealthCard } from "@/components/card/health-card"
 import { Essentials } from "@/components/home/essentials"
+import { RecordsSection } from "@/components/records/records-section"
 import { accessApi } from "@/lib/api/access"
 import { usePoll } from "@/lib/hooks/use-poll"
 import { useSessionStore } from "@/lib/stores/session-store"
@@ -41,6 +43,8 @@ export default function HomePage() {
       <div className="flex flex-col gap-4">
         {records.data ? <Essentials records={records.data} /> : null}
         <ActiveSessions />
+        {records.data ? <RecordsSection records={records.data} onChange={records.refresh} /> : null}
+        <AccessHistory />
       </div>
     </main>
   )
