@@ -108,7 +108,7 @@
 
   --ink: #FAFAFA;
   --ink-subtle: #A1A1AA;
-  --ink-weak: #52525B;
+  --ink-weak: #8E8E98;
   --danger: #F97066;
 
   --line: #27272A;
@@ -150,10 +150,10 @@
   --text-label: 1rem;           /* buttons: Inter Medium 16 */
   --text-label--line-height: 1.2;
   --text-label--font-weight: 500;
-  --text-input: 1rem;           /* text inside fields: Inter Medium 16 */
-  --text-input--line-height: 1.2;
-  --text-input--letter-spacing: -0.02em;
-  --text-input--font-weight: 500;
+  --text-entry: 1rem;           /* text inside fields: Inter Medium 16 */
+  --text-entry--line-height: 1.2;
+  --text-entry--letter-spacing: -0.02em;
+  --text-entry--font-weight: 500;
   --text-caption: 0.75rem;      /* hints, chips: Inter Regular 12 */
   --text-caption--line-height: 1.2;
   --text-caption--letter-spacing: 0.02em;
