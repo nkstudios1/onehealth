@@ -14,7 +14,7 @@ import { useSessionStore } from "@/lib/stores/session-store"
 const NAV = [
   { label: "Home", href: "/home", Icon: House },
   { label: "My Vitals", href: "/home#vitals", Icon: IdentificationCard },
-  { label: "My Records", href: "/home#records", Icon: List },
+  { label: "My Records", href: "/records", Icon: List },
   { label: "Access Log", href: "/home#access-log", Icon: List },
 ]
 
