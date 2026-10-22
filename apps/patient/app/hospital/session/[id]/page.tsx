@@ -113,7 +113,7 @@ export default function SessionPage({ params }: { params: Promise<{ id: string }
         >
           <h2 className="text-title">Add a visit note</h2>
           <textarea
-            className="min-h-24 w-full rounded-md border border-line bg-field p-3 text-input text-ink placeholder:text-ink-weak focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            className="min-h-24 w-full rounded-md border border-line bg-field p-3 text-entry text-ink placeholder:text-ink-weak focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="e.g. Admitted with a broken wrist. X-ray done."
