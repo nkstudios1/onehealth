@@ -60,7 +60,7 @@ function VitalCard({ item }: { item: (typeof vitals)[number] }) {
       <div className="mt-6 flex min-h-[54px] flex-col justify-end">
         {"lines" in item ? (
           <div className="space-y-1 text-[13px] text-[#666]">
-            {item.lines.map((line) => <span key={line} className="block w-fit rounded border border-[#dedede] bg-white px-2 py-0.5">{line}</span>)}
+            {item.lines?.map((line) => <span key={line} className="block w-fit rounded border border-[#dedede] bg-white px-2 py-0.5">{line}</span>)}
           </div>
         ) : (
           <p className="whitespace-nowrap">
